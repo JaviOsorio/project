@@ -24,6 +24,9 @@ import { UserEntity } from '../users/entities/user.entity';
         username: configService.get<string>('db.username'),
         password: configService.get<string>('db.password'),
         database: configService.get<string>('db.database'),
+        ssl: {
+          rejectUnauthorized: false,
+        },
         entities: [
           CompanyEntity,
           BranchEntity,

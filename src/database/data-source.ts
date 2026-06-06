@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import { DataSource } from 'typeorm';
 
 import { configuration } from '../config/configuration';
@@ -13,6 +14,12 @@ import { UserEntity } from '../users/entities/user.entity';
 
 const config = configuration();
 
+console.log('DB Config:', {
+  host: config.db.host,
+  port: config.db.port,
+  database: config.db.database,
+});
+
 export default new DataSource({
   type: 'postgres',
   host: config.db.host,
@@ -20,8 +27,14 @@ export default new DataSource({
   username: config.db.username,
   password: config.db.password,
   database: config.db.database,
+
+  ssl: {
+    rejectUnauthorized: false,
+  },
+
   synchronize: false,
   logging: config.db.logging,
+
   entities: [
     CompanyEntity,
     BranchEntity,
@@ -33,5 +46,6 @@ export default new DataSource({
     AppointmentEntity,
     AppointmentServiceEntity,
   ],
+
   migrations: ['src/database/migrations/*.ts'],
 });
