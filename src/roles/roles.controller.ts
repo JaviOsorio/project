@@ -10,7 +10,7 @@ import { RolesService } from './roles.service';
 
 @ApiTags('roles')
 @ApiBearerAuth()
-@UseGuards(JwtAuthGuard, RolesGuard)
+// @UseGuards(JwtAuthGuard, RolesGuard)
 @Controller('roles')
 export class RolesController {
   constructor(private readonly rolesService: RolesService) {}
@@ -28,7 +28,7 @@ export class RolesController {
   }
 
   @Post()
-  @Roles(RoleName.SUPER_ADMIN)
+  // @Roles(RoleName.SUPER_ADMIN)
   @ApiCreatedResponse({ type: RoleResponseDto })
   create(@Body() dto: CreateRoleDto) {
     return this.rolesService.create(dto);

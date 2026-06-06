@@ -11,6 +11,13 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const configService = app.get(ConfigService);
 
+  app.enableCors({
+    origin: [
+      'https://proyecto-barber-connect.vercel.app',
+    ],
+    credentials: true,
+  });
+
   const apiPrefix = configService.get<string>('apiPrefix') ?? 'api';
   const swaggerPath = configService.get<string>('swaggerPath') ?? 'docs';
 

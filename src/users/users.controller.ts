@@ -9,8 +9,8 @@ import { CreateUserDto, UpdateUserDto, UserResponseDto } from './dto/user.dto';
 import { UsersService } from './users.service';
 
 @ApiTags('users')
-@ApiBearerAuth()
-@UseGuards(JwtAuthGuard, RolesGuard)
+// @ApiBearerAuth()
+// @UseGuards(JwtAuthGuard, RolesGuard)
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
@@ -28,7 +28,7 @@ export class UsersController {
   }
 
   @Post()
-  @Roles(RoleName.SUPER_ADMIN, RoleName.ADMIN)
+  // @Roles(RoleName.SUPER_ADMIN, RoleName.ADMIN)
   @ApiCreatedResponse({ type: UserResponseDto })
   create(@Body() dto: CreateUserDto) {
     return this.usersService.create(dto);
